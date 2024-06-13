@@ -10,7 +10,7 @@ access_gestion_escolar_curso,gestion_escolar.curso,model_gestion_escolar_curso,b
 access_gestion_escolar_paralelo,gestion_escolar.paralelo,model_gestion_escolar_paralelo,base.group_user,1,1,1,1
 access_gestion_escolar_materia,gestion_escolar.materia,model_gestion_escolar_materia,base.group_user,1,1,1,1
 access_gestion_escolar_planificacion_examen,gestion_escolar.planificacion_examen,model_gestion_escolar_planificacion_examen,base.group_user,1,1,1,1
-access_gestion_escolar_nota_alumno,gestion_escolar.nota_alumno,model_gestion_escolar_nota_alumno,base.group_user,1,1,1,1
-access_gestion_escolar_boletin_alumno,gestion_escolar.boletin_alumno,model_gestion_escolar_boletin_alumno,base.group_user,1,1,1,1
+access_gestion_escolar_nota,gestion_escolar.nota,model_gestion_escolar_nota,base.group_user,1,1,1,1
+access_gestion_escolar_boletin,gestion_escolar.boletin,model_gestion_escolar_boletin,base.group_user,1,1,1,1
 access_gestion_escolar_reporte,gestion_escolar.reporte,model_gestion_escolar_reporte,base.group_user,1,1,1,1
 access_gestion_escolar_anuncio,gestion_escolar.anuncio,model_gestion_escolar_anuncio,base.group_user,1,1,1,1

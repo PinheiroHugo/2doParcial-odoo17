@@ -101,10 +101,9 @@ class materia(models.Model):
 
     name = fields.Char(string='Nombre', required=True)
     curso_id = fields.Many2one('gestion_escolar.curso', string='Curso', required=True)
-    aula_id = fields.Many2one('gestion_escolar.aula', string='Aula', required=True)
     horario_id = fields.Many2one('gestion_escolar.horario', string='Horario', required=True)
     profesor_id = fields.Many2one('gestion_escolar.profesor', string='Profesor', required=True)
-    boletin_id = fields.Many2one('gestion_escolar.boletin_alumno', string='Boletín de Alumno')
+    boletin_id = fields.Many2one('gestion_escolar.boletin', string='Boletín de Alumno')
     
 #Notas y Calificaciones   
 class planificacion_examen(models.Model):
@@ -115,8 +114,8 @@ class planificacion_examen(models.Model):
     profesor_id = fields.Many2one('gestion_escolar.profesor', string='Profesor', required=True)
     fecha = fields.Date(string='Fecha', required=True) 
     
-class nota_alumno(models.Model):
-    _name = 'gestion_escolar.nota_alumno'
+class nota(models.Model):
+    _name = 'gestion_escolar.nota'
     _description = 'Nota de Alumno'
 
     alumno_id = fields.Many2one('res.partner', string='Alumno', required=True)
@@ -125,10 +124,10 @@ class nota_alumno(models.Model):
     profesor_id = fields.Many2one('gestion_escolar.profesor', string='Profesor', required=True)
     planificacion_examen_id = fields.Many2one('gestion_escolar.planificacion_examen', string='Planificacion Examen', required=True)
     ponderacion = fields.Float(string='Ponderación', required=True)
-    boletin_id = fields.Many2one('gestion_escolar.boletin_alumno', string='Boletín de Alumno') 
+    boletin_id = fields.Many2one('gestion_escolar.boletin', string='Boletín de Alumno') 
     
-class boletin_alumno(models.Model):
-    _name = 'gestion_escolar.boletin_alumno'
+class boletin(models.Model):
+    _name = 'gestion_escolar.boletin'
     _description = 'Boletín de Alumno'
 
     alumno_id = fields.Many2one('res.partner', string='Alumno', required=True)
@@ -136,7 +135,7 @@ class boletin_alumno(models.Model):
     gestion_id = fields.Many2one('gestion_escolar.gestion', string='Gestion', required=True)
     profesor_id = fields.Many2one('gestion_escolar.profesor', string='Profesor', required=True)
     materia_ids = fields.One2many('gestion_escolar.materia', 'boletin_id', string='Materias')
-    nota_ids = fields.One2many('gestion_escolar.nota_alumno', 'boletin_id', string='Notas')
+    nota_ids = fields.One2many('gestion_escolar.nota', 'boletin_id', string='Notas')
     
 #Informacion
 class reporte(models.Model):

@@ -268,7 +268,6 @@
             <group>
               <field name="name" />
               <field name="curso_id" />
-              <field name="aula_id" />
               <field name="horario_id" />
             </group>
           </sheet>
@@ -283,7 +282,6 @@
         <tree string="Materia">
           <field name="name" />
           <field name="curso_id" />
-          <field name="aula_id" />
           <field name="horario_id" />
         </tree>
       </field>
@@ -317,9 +315,9 @@
       </field>
     </record>
 
-    <record id="view_nota_alumno_form" model="ir.ui.view">
-      <field name="name">nota_alumno.form</field>
-      <field name="model">gestion_escolar.nota_alumno</field>
+    <record id="view_nota_form" model="ir.ui.view">
+      <field name="name">nota.form</field>
+      <field name="model">gestion_escolar.nota</field>
       <field name="arch" type="xml">
         <form string="Nota de Alumno">
           <sheet>
@@ -336,9 +334,9 @@
       </field>
     </record>
 
-    <record id="view_nota_alumno_tree" model="ir.ui.view">
-      <field name="name">nota_alumno.tree</field>
-      <field name="model">gestion_escolar.nota_alumno</field>
+    <record id="view_nota_tree" model="ir.ui.view">
+      <field name="name">nota.tree</field>
+      <field name="model">gestion_escolar.nota</field>
       <field name="arch" type="xml">
         <tree string="Nota de Alumno">
           <field name="alumno_id" />
@@ -351,9 +349,9 @@
       </field>
     </record>
 
-    <record id="view_boletin_alumno_form" model="ir.ui.view">
-      <field name="name">boletin_alumno.form</field>
-      <field name="model">gestion_escolar.boletin_alumno</field>
+    <record id="view_boletin_form" model="ir.ui.view">
+      <field name="name">boletin.form</field>
+      <field name="model">gestion_escolar.boletin</field>
       <field name="arch" type="xml">
         <form string="Boletín de Alumno">
           <sheet>
@@ -370,9 +368,9 @@
       </field>
     </record>
 
-    <record id="view_boletin_alumno_tree" model="ir.ui.view">
-      <field name="name">boletin_alumno.tree</field>
-      <field name="model">gestion_escolar.boletin_alumno</field>
+    <record id="view_boletin_tree" model="ir.ui.view">
+      <field name="name">boletin.tree</field>
+      <field name="model">gestion_escolar.boletin</field>
       <field name="arch" type="xml">
         <tree string="Boletín de Alumno">
           <field name="alumno_id" />
@@ -503,15 +501,15 @@
       <field name="view_mode">tree,form</field>
     </record>
 
-    <record id="action_nota_alumno" model="ir.actions.act_window">
+    <record id="action_nota" model="ir.actions.act_window">
       <field name="name">Notas de Alumno</field>
-      <field name="res_model">gestion_escolar.nota_alumno</field>
+      <field name="res_model">gestion_escolar.nota</field>
       <field name="view_mode">tree,form</field>
     </record>
 
-    <record id="action_boletin_alumno" model="ir.actions.act_window">
+    <record id="action_boletin" model="ir.actions.act_window">
       <field name="name">Boletines de Alumno</field>
-      <field name="res_model">gestion_escolar.boletin_alumno</field>
+      <field name="res_model">gestion_escolar.boletin</field>
       <field name="view_mode">tree,form</field>
     </record>
 
@@ -582,10 +580,10 @@
 
     <menuitem id="menu_planificacion_examen" name="Exámenes" parent="menu_3_gestion_escolar_root"
       action="action_planificacion_examen" sequence="10" />
-    <menuitem id="menu_nota_alumno" name="Notas de Alumno" parent="menu_3_gestion_escolar_root"
-      action="action_nota_alumno" sequence="20" />
-    <menuitem id="menu_boletin_alumno" name="Boletines de Alumno"
-      parent="menu_3_gestion_escolar_root" action="action_boletin_alumno" sequence="30" />
+    <menuitem id="menu_nota" name="Notas de Alumno" parent="menu_3_gestion_escolar_root"
+      action="action_nota" sequence="20" />
+    <menuitem id="menu_boletin" name="Boletines de Alumno"
+      parent="menu_3_gestion_escolar_root" action="action_boletin" sequence="30" />
 
     <menuitem id="menu_reporte" name="Reportes" parent="menu_4_gestion_escolar_root"
       action="action_reporte" sequence="10" />
