@@ -1,0 +1,596 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record id="view_inscripcion_form" model="ir.ui.view">
+      <field name="name">inscripcion.form</field>
+      <field name="model">gestion_escolar.inscripcion</field>
+      <field name="arch" type="xml">
+        <form string="Inscripción">
+          <sheet>
+            <group>
+              <field name="persona_id" />
+              <field name="curso_id" />
+              <field name="gestion_id" />
+              <field name="fecha_inscripcion" />
+              <field name="lead_id" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_inscripcion_tree" model="ir.ui.view">
+      <field name="name">inscripcion.tree</field>
+      <field name="model">gestion_escolar.inscripcion</field>
+      <field name="arch" type="xml">
+        <tree string="Inscripciones">
+          <field name="persona_id" />
+          <field name="curso_id" />
+          <field name="gestion_id" />
+          <field name="fecha_inscripcion" />
+          <field name="lead_id" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_gestion_form" model="ir.ui.view">
+      <field name="name">gestion.form</field>
+      <field name="model">gestion_escolar.gestion</field>
+      <field name="arch" type="xml">
+        <form string="Gestion">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="fecha_inicio" />
+              <field name="fecha_final" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_gestion_tree" model="ir.ui.view">
+      <field name="name">gestion.tree</field>
+      <field name="model">gestion_escolar.gestion</field>
+      <field name="arch" type="xml">
+        <tree string="Gestiones">
+          <field name="name" />
+          <field name="fecha_inicio" />
+          <field name="fecha_final" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_padre_form" model="ir.ui.view">
+      <field name="name">padre.form</field>
+      <field name="model">gestion_escolar.padre</field>
+      <field name="arch" type="xml">
+        <form string="Padre o Madre del Estudiante">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="padre_id" />
+              <field name="alumno_ids" widget="many2many_tags">
+                <tree string="Alumnos">
+                  <field name="name" />
+                </tree>
+              </field>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_padre_tree" model="ir.ui.view">
+      <field name="name">padre.tree</field>
+      <field name="model">gestion_escolar.padre</field>
+      <field name="arch" type="xml">
+        <tree string="Padre">
+          <field name="name" />
+          <field name="padre_id" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_profesor_form" model="ir.ui.view">
+      <field name="name">profesor.form</field>
+      <field name="model">gestion_escolar.profesor</field>
+      <field name="arch" type="xml">
+        <form string="Profesor">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="materia_ids" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_profesor_tree" model="ir.ui.view">
+      <field name="name">profesor.tree</field>
+      <field name="model">gestion_escolar.profesor</field>
+      <field name="arch" type="xml">
+        <tree string="Profesor">
+          <field name="name" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_pago_mensualidad_form" model="ir.ui.view">
+      <field name="name">pago_mensualidad.form</field>
+      <field name="model">gestion_escolar.pago_mensualidad</field>
+      <field name="arch" type="xml">
+        <form string="Pago de Mensualidad">
+          <sheet>
+            <group>
+              <field name="alumno_id" />
+              <field name="monto" />
+              <field name="mes" />
+              <field name="nit" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_pago_mensualidad_tree" model="ir.ui.view">
+      <field name="name">pago_mensualidad.tree</field>
+      <field name="model">gestion_escolar.pago_mensualidad</field>
+      <field name="arch" type="xml">
+        <tree string="Pago de Mensualidad">
+          <field name="alumno_id" />
+          <field name="monto" />
+          <field name="mes" />
+          <field name="nit" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_asistencia_form" model="ir.ui.view">
+      <field name="name">asistencia.form</field>
+      <field name="model">gestion_escolar.asistencia</field>
+      <field name="arch" type="xml">
+        <form string="Asistencia">
+          <sheet>
+            <group>
+              <field name="fecha" />
+              <field name="alumno_id" />
+              <field name="profesor_id" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_asistencia_tree" model="ir.ui.view">
+      <field name="name">asistencia.tree</field>
+      <field name="model">gestion_escolar.asistencia</field>
+      <field name="arch" type="xml">
+        <tree string="Asistencia">
+          <field name="fecha" />
+          <field name="alumno_id" />
+          <field name="profesor_id" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_horario_form" model="ir.ui.view">
+      <field name="name">horario.form</field>
+      <field name="model">gestion_escolar.horario</field>
+      <field name="arch" type="xml">
+        <form string="Horario">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="hora_inicio" />
+              <field name="hora_fin" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_horario_tree" model="ir.ui.view">
+      <field name="name">horario.tree</field>
+      <field name="model">gestion_escolar.horario</field>
+      <field name="arch" type="xml">
+        <tree string="Horario">
+          <field name="name" />
+          <field name="hora_inicio" />
+          <field name="hora_fin" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_curso_form" model="ir.ui.view">
+      <field name="name">curso.form</field>
+      <field name="model">gestion_escolar.curso</field>
+      <field name="arch" type="xml">
+        <form string="Curso">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="nivel" />
+              <field name="grado" />
+              <field name="turno" />
+              <field name="paralelo_id" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_curso_tree" model="ir.ui.view">
+      <field name="name">curso.tree</field>
+      <field name="model">gestion_escolar.curso</field>
+      <field name="arch" type="xml">
+        <tree string="Curso">
+          <field name="name" />
+          <field name="nivel" />
+          <field name="grado" />
+          <field name="turno" />
+          <field name="paralelo_id" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_paralelo_form" model="ir.ui.view">
+      <field name="name">paralelo.form</field>
+      <field name="model">gestion_escolar.paralelo</field>
+      <field name="arch" type="xml">
+        <form string="Paralelo">
+          <sheet>
+            <group>
+              <field name="descripcion" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_paralelo_tree" model="ir.ui.view">
+      <field name="name">paralelo.tree</field>
+      <field name="model">gestion_escolar.paralelo</field>
+      <field name="arch" type="xml">
+        <tree string="Paralelo">
+          <field name="descripcion" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_materia_form" model="ir.ui.view">
+      <field name="name">materia.form</field>
+      <field name="model">gestion_escolar.materia</field>
+      <field name="arch" type="xml">
+        <form string="Materia">
+          <sheet>
+            <group>
+              <field name="name" />
+              <field name="curso_id" />
+              <field name="aula_id" />
+              <field name="horario_id" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_materia_tree" model="ir.ui.view">
+      <field name="name">materia.tree</field>
+      <field name="model">gestion_escolar.materia</field>
+      <field name="arch" type="xml">
+        <tree string="Materia">
+          <field name="name" />
+          <field name="curso_id" />
+          <field name="aula_id" />
+          <field name="horario_id" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_planificacion_examen_form" model="ir.ui.view">
+      <field name="name">planificacion_examen.form</field>
+      <field name="model">gestion_escolar.planificacion_examen</field>
+      <field name="arch" type="xml">
+        <form string="Planificacion Examen">
+          <sheet>
+            <group>
+              <field name="materia_id" />
+              <field name="profesor_id" />
+              <field name="fecha" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_planificacion_examen_tree" model="ir.ui.view">
+      <field name="name">planificacion_examen.tree</field>
+      <field name="model">gestion_escolar.planificacion_examen</field>
+      <field name="arch" type="xml">
+        <tree string="planificacion_examen">
+          <field name="materia_id" />
+          <field name="profesor_id" />
+          <field name="fecha" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_nota_alumno_form" model="ir.ui.view">
+      <field name="name">nota_alumno.form</field>
+      <field name="model">gestion_escolar.nota_alumno</field>
+      <field name="arch" type="xml">
+        <form string="Nota de Alumno">
+          <sheet>
+            <group>
+              <field name="alumno_id" />
+              <field name="curso_id" />
+              <field name="materia_id" />
+              <field name="profesor_id" />
+              <field name="planificacion_examen_id" />
+              <field name="ponderacion" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_nota_alumno_tree" model="ir.ui.view">
+      <field name="name">nota_alumno.tree</field>
+      <field name="model">gestion_escolar.nota_alumno</field>
+      <field name="arch" type="xml">
+        <tree string="Nota de Alumno">
+          <field name="alumno_id" />
+          <field name="curso_id" />
+          <field name="materia_id" />
+          <field name="profesor_id" />
+          <field name="planificacion_examen_id" />
+          <field name="ponderacion" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_boletin_alumno_form" model="ir.ui.view">
+      <field name="name">boletin_alumno.form</field>
+      <field name="model">gestion_escolar.boletin_alumno</field>
+      <field name="arch" type="xml">
+        <form string="Boletín de Alumno">
+          <sheet>
+            <group>
+              <field name="alumno_id" />
+              <field name="curso_id" />
+              <field name="gestion_id" />
+              <field name="profesor_id" />
+              <field name="materia_ids" />
+              <field name="nota_ids" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_boletin_alumno_tree" model="ir.ui.view">
+      <field name="name">boletin_alumno.tree</field>
+      <field name="model">gestion_escolar.boletin_alumno</field>
+      <field name="arch" type="xml">
+        <tree string="Boletín de Alumno">
+          <field name="alumno_id" />
+          <field name="curso_id" />
+          <field name="gestion_id" />
+          <field name="profesor_id" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_reporte_form" model="ir.ui.view">
+      <field name="name">reporte.form</field>
+      <field name="model">gestion_escolar.reporte</field>
+      <field name="arch" type="xml">
+        <form string="Reporte">
+          <sheet>
+            <group>
+              <field name="curso_id" />
+              <field name="deudores_ids" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_reporte_tree" model="ir.ui.view">
+      <field name="name">reporte.tree</field>
+      <field name="model">gestion_escolar.reporte</field>
+      <field name="arch" type="xml">
+        <tree string="Reporte">
+          <field name="curso_id" />
+          <field name="deudores_ids" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_anuncio_form" model="ir.ui.view">
+      <field name="name">anuncio.form</field>
+      <field name="model">gestion_escolar.anuncio</field>
+      <field name="arch" type="xml">
+        <form string="Anuncio">
+          <sheet>
+            <group>
+              <field name="titulo" />
+              <field name="descripcion" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_anuncio_tree" model="ir.ui.view">
+      <field name="name">anuncio.tree</field>
+      <field name="model">gestion_escolar.anuncio</field>
+      <field name="arch" type="xml">
+        <tree string="anuncio">
+          <field name="titulo" />
+          <field name="descripcion" />
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <record id="action_inscripcion" model="ir.actions.act_window">
+      <field name="name">Inscripciones</field>
+      <field name="res_model">gestion_escolar.inscripcion</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_gestion" model="ir.actions.act_window">
+      <field name="name">Gestiones</field>
+      <field name="res_model">gestion_escolar.gestion</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_padre" model="ir.actions.act_window">
+      <field name="name">Padres</field>
+      <field name="res_model">gestion_escolar.padre</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_profesor" model="ir.actions.act_window">
+      <field name="name">Profesores</field>
+      <field name="res_model">gestion_escolar.profesor</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_pago_mensualidad" model="ir.actions.act_window">
+      <field name="name">Pagos de Mensualidad</field>
+      <field name="res_model">gestion_escolar.pago_mensualidad</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_asistencia" model="ir.actions.act_window">
+      <field name="name">Asistencia</field>
+      <field name="res_model">gestion_escolar.asistencia</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_horario" model="ir.actions.act_window">
+      <field name="name">Horarios</field>
+      <field name="res_model">gestion_escolar.horario</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_curso" model="ir.actions.act_window">
+      <field name="name">Cursos</field>
+      <field name="res_model">gestion_escolar.curso</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_paralelo" model="ir.actions.act_window">
+      <field name="name">Paralelos</field>
+      <field name="res_model">gestion_escolar.paralelo</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_materia" model="ir.actions.act_window">
+      <field name="name">Materias</field>
+      <field name="res_model">gestion_escolar.materia</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_planificacion_examen" model="ir.actions.act_window">
+      <field name="name">Exámenes</field>
+      <field name="res_model">gestion_escolar.planificacion_examen</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_nota_alumno" model="ir.actions.act_window">
+      <field name="name">Notas de Alumno</field>
+      <field name="res_model">gestion_escolar.nota_alumno</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_boletin_alumno" model="ir.actions.act_window">
+      <field name="name">Boletines de Alumno</field>
+      <field name="res_model">gestion_escolar.boletin_alumno</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_reporte" model="ir.actions.act_window">
+      <field name="name">Reportes</field>
+      <field name="res_model">gestion_escolar.reporte</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_anuncio" model="ir.actions.act_window">
+      <field name="name">anuncios</field>
+      <field name="res_model">gestion_escolar.anuncio</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="gestion_escolar.action_server">
+      <field name="name">gestion_escolar server</field>
+      <field name="model_id" ref="model_gestion_escolar_gestion_escolar"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+
+    <!-- Top menu item -->
+    <menuitem id="menu_gestion_escolar_root" name="Gestión Escolar" sequence="1" />
+
+    <!-- menu categories -->
+    <menuitem id="menu_1_gestion_escolar_root" name="Administración Y Admisión"
+      parent="menu_gestion_escolar_root" sequence="2" />
+    <menuitem id="menu_2_gestion_escolar_root" name="Clases y Horarios"
+      parent="menu_gestion_escolar_root" sequence="3" />
+    <menuitem id="menu_3_gestion_escolar_root" name="Notas y Calificaciones   "
+      parent="menu_gestion_escolar_root" sequence="4" />
+    <menuitem id="menu_4_gestion_escolar_root" name="Informacion"
+      parent="menu_gestion_escolar_root" sequence="5" />
+
+    <!-- Sub menu -->
+    <menuitem id="menu_inscripcion" name="Inscripciones" parent="menu_1_gestion_escolar_root"
+      action="action_inscripcion" sequence="10" />
+    <menuitem id="menu_gestion" name="Gestiones" parent="menu_1_gestion_escolar_root"
+      action="action_gestion" sequence="20" />
+    <menuitem id="menu_padre" name="Padres" parent="menu_1_gestion_escolar_root"
+      action="action_padre" sequence="30" />
+    <menuitem id="menu_profesor" name="Profesores" parent="menu_1_gestion_escolar_root"
+      action="action_profesor" sequence="40" />
+    <menuitem id="menu_pago_mensualidad" name="Pagos de Mensualidad"
+      parent="menu_1_gestion_escolar_root" action="action_pago_mensualidad" sequence="50" />
+
+    <menuitem id="menu_asistencia" name="Asistencia" parent="menu_2_gestion_escolar_root"
+      action="action_asistencia" sequence="10" />
+    <menuitem id="menu_horario" name="Horarios" parent="menu_2_gestion_escolar_root"
+      action="action_horario" sequence="20" />
+    <menuitem id="menu_curso" name="Cursos" parent="menu_2_gestion_escolar_root"
+      action="action_curso" sequence="30" />
+    <menuitem id="menu_paralelo" name="Paralelos" parent="menu_2_gestion_escolar_root"
+      action="action_paralelo" sequence="40" />
+    <menuitem id="menu_materia" name="Materias" parent="menu_2_gestion_escolar_root"
+      action="action_materia" sequence="50" />
+
+    <menuitem id="menu_planificacion_examen" name="Exámenes" parent="menu_3_gestion_escolar_root"
+      action="action_planificacion_examen" sequence="10" />
+    <menuitem id="menu_nota_alumno" name="Notas de Alumno" parent="menu_3_gestion_escolar_root"
+      action="action_nota_alumno" sequence="20" />
+    <menuitem id="menu_boletin_alumno" name="Boletines de Alumno"
+      parent="menu_3_gestion_escolar_root" action="action_boletin_alumno" sequence="30" />
+
+    <menuitem id="menu_reporte" name="Reportes" parent="menu_4_gestion_escolar_root"
+      action="action_reporte" sequence="10" />
+    <menuitem id="menu_anuncio" name="Anuncios" parent="menu_4_gestion_escolar_root"
+      action="action_anuncio" sequence="20" />
+
+  </data>
+</odoo>
