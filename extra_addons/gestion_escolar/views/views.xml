@@ -12,7 +12,7 @@
               <field name="curso_id" />
               <field name="gestion_id" />
               <field name="fecha_inscripcion" />
-              <field name="lead_id" />
+              <field name="apoderado_id" />
             </group>
           </sheet>
         </form>
@@ -28,7 +28,7 @@
           <field name="curso_id" />
           <field name="gestion_id" />
           <field name="fecha_inscripcion" />
-          <field name="lead_id" />
+          <field name="apoderado_id" />
         </tree>
       </field>
     </record>
@@ -43,6 +43,7 @@
               <field name="name" />
               <field name="fecha_inicio" />
               <field name="fecha_final" />
+              <field name="cursos" />
             </group>
           </sheet>
         </form>
@@ -57,37 +58,35 @@
           <field name="name" />
           <field name="fecha_inicio" />
           <field name="fecha_final" />
+          <field name="cursos" />
         </tree>
       </field>
     </record>
 
-    <record id="view_padre_form" model="ir.ui.view">
-      <field name="name">padre.form</field>
-      <field name="model">gestion_escolar.padre</field>
+    <record id="view_form_apoderado" model="ir.ui.view">
+      <field name="name">apoderado.form</field>
+      <field name="model">gestion_escolar.apoderado</field>
       <field name="arch" type="xml">
-        <form string="Padre o Madre del Estudiante">
+        <form string="Apoderado">
           <sheet>
             <group>
               <field name="name" />
-              <field name="padre_id" />
-              <field name="alumno_ids" widget="many2many_tags">
-                <tree string="Alumnos">
-                  <field name="name" />
-                </tree>
-              </field>
+              <field name="parentesco" />
+              <field name="mobile" />
             </group>
           </sheet>
         </form>
       </field>
     </record>
 
-    <record id="view_padre_tree" model="ir.ui.view">
-      <field name="name">padre.tree</field>
-      <field name="model">gestion_escolar.padre</field>
+    <record id="view_tree_apoderado" model="ir.ui.view">
+      <field name="name">apoderado.tree</field>
+      <field name="model">gestion_escolar.apoderado</field>
       <field name="arch" type="xml">
-        <tree string="Padre">
+        <tree string="Apoderado">
           <field name="name" />
-          <field name="padre_id" />
+          <field name="parentesco" />
+          <field name="mobile" />
         </tree>
       </field>
     </record>
@@ -99,8 +98,8 @@
         <form string="Profesor">
           <sheet>
             <group>
-              <field name="name" />
-              <field name="materia_ids" />
+              <field name="persona_id" />
+              <field name="telefono" />
             </group>
           </sheet>
         </form>
@@ -112,19 +111,20 @@
       <field name="model">gestion_escolar.profesor</field>
       <field name="arch" type="xml">
         <tree string="Profesor">
-          <field name="name" />
+          <field name="persona_id" />
+          <field name="telefono" />
         </tree>
       </field>
     </record>
 
-    <record id="view_pago_mensualidad_form" model="ir.ui.view">
-      <field name="name">pago_mensualidad.form</field>
-      <field name="model">gestion_escolar.pago_mensualidad</field>
+    <record id="view_mensualidad_form" model="ir.ui.view">
+      <field name="name">mensualidad.form</field>
+      <field name="model">gestion_escolar.mensualidad</field>
       <field name="arch" type="xml">
         <form string="Pago de Mensualidad">
           <sheet>
             <group>
-              <field name="alumno_id" />
+              <field name="alumnos" />
               <field name="monto" />
               <field name="mes" />
               <field name="nit" />
@@ -134,12 +134,12 @@
       </field>
     </record>
 
-    <record id="view_pago_mensualidad_tree" model="ir.ui.view">
-      <field name="name">pago_mensualidad.tree</field>
-      <field name="model">gestion_escolar.pago_mensualidad</field>
+    <record id="view_mensualidad_tree" model="ir.ui.view">
+      <field name="name">mensualidad.tree</field>
+      <field name="model">gestion_escolar.mensualidad</field>
       <field name="arch" type="xml">
         <tree string="Pago de Mensualidad">
-          <field name="alumno_id" />
+          <field name="alumnos" />
           <field name="monto" />
           <field name="mes" />
           <field name="nit" />
@@ -155,8 +155,8 @@
           <sheet>
             <group>
               <field name="fecha" />
-              <field name="alumno_id" />
-              <field name="profesor_id" />
+              <field name="profesor" />
+              <field name="alumnos" />
             </group>
           </sheet>
         </form>
@@ -169,8 +169,8 @@
       <field name="arch" type="xml">
         <tree string="Asistencia">
           <field name="fecha" />
-          <field name="alumno_id" />
-          <field name="profesor_id" />
+          <field name="profesor" />
+          <field name="alumnos" />
         </tree>
       </field>
     </record>
@@ -183,8 +183,10 @@
           <sheet>
             <group>
               <field name="name" />
-              <field name="hora_inicio" />
-              <field name="hora_fin" />
+              <field name="dia" />
+              <field name="hora_inicio" widget="float_time" />
+              <field name="hora_fin" widget="float_time" />
+              <field name="materia_id" />
             </group>
           </sheet>
         </form>
@@ -197,8 +199,10 @@
       <field name="arch" type="xml">
         <tree string="Horario">
           <field name="name" />
-          <field name="hora_inicio" />
-          <field name="hora_fin" />
+          <field name="dia" />
+          <field name="hora_inicio" widget="float_time" />
+          <field name="hora_fin" widget="float_time" />
+          <field name="materia_id" />
         </tree>
       </field>
     </record>
@@ -215,6 +219,9 @@
               <field name="grado" />
               <field name="turno" />
               <field name="paralelo_id" />
+              <field name="profesor" />
+              <field name="horarios" />
+              <field name="alumnos" />
             </group>
           </sheet>
         </form>
@@ -231,6 +238,9 @@
           <field name="grado" />
           <field name="turno" />
           <field name="paralelo_id" />
+          <field name="profesor" />
+          <field name="horarios" />
+          <field name="alumnos" />
         </tree>
       </field>
     </record>
@@ -242,7 +252,7 @@
         <form string="Paralelo">
           <sheet>
             <group>
-              <field name="descripcion" />
+              <field name="name" />
             </group>
           </sheet>
         </form>
@@ -254,7 +264,7 @@
       <field name="model">gestion_escolar.paralelo</field>
       <field name="arch" type="xml">
         <tree string="Paralelo">
-          <field name="descripcion" />
+          <field name="name" />
         </tree>
       </field>
     </record>
@@ -267,8 +277,6 @@
           <sheet>
             <group>
               <field name="name" />
-              <field name="curso_id" />
-              <field name="horario_id" />
             </group>
           </sheet>
         </form>
@@ -281,39 +289,50 @@
       <field name="arch" type="xml">
         <tree string="Materia">
           <field name="name" />
-          <field name="curso_id" />
-          <field name="horario_id" />
         </tree>
       </field>
     </record>
 
-    <record id="view_planificacion_examen_form" model="ir.ui.view">
-      <field name="name">planificacion_examen.form</field>
-      <field name="model">gestion_escolar.planificacion_examen</field>
+    <record id="view_plan_examen_form" model="ir.ui.view">
+      <field name="name">plan_examen.form</field>
+      <field name="model">gestion_escolar.plan_examen</field>
       <field name="arch" type="xml">
-        <form string="Planificacion Examen">
+        <form string="Plan Examen">
           <sheet>
             <group>
-              <field name="materia_id" />
-              <field name="profesor_id" />
               <field name="fecha" />
+              <field name="profesor" />
+              <field name="materia_id" />
+              <field name="curso_id" />
             </group>
           </sheet>
         </form>
       </field>
     </record>
 
-    <record id="view_planificacion_examen_tree" model="ir.ui.view">
-      <field name="name">planificacion_examen.tree</field>
-      <field name="model">gestion_escolar.planificacion_examen</field>
+    <record id="view_plan_examen_tree" model="ir.ui.view">
+      <field name="name">plan_examen.tree</field>
+      <field name="model">gestion_escolar.plan_examen</field>
       <field name="arch" type="xml">
-        <tree string="planificacion_examen">
-          <field name="materia_id" />
-          <field name="profesor_id" />
+        <tree string="plan_examen">
           <field name="fecha" />
+          <field name="profesor" />
+          <field name="materia_id" />
+          <field name="curso_id" />
         </tree>
       </field>
     </record>
+
+    <!-- <record id="view_plan_examen_calendar" model="ir.ui.view">
+      <field name="name">gestion_escolar.plan_examen.calendar</field>
+      <field name="model">gestion_escolar.plan_examen</field>
+      <field name="inherit_id" ref="calendar.view_calendar_event_calendar" />
+      <field name="arch" type="xml">
+        <calendar string="Plan de Examenes" date_start="start" date_stop="stop">
+          <field name="name" />
+        </calendar>
+      </field>
+    </record> -->
 
     <record id="view_nota_form" model="ir.ui.view">
       <field name="name">nota.form</field>
@@ -322,11 +341,11 @@
         <form string="Nota de Alumno">
           <sheet>
             <group>
-              <field name="alumno_id" />
+              <field name="alumnos" />
               <field name="curso_id" />
               <field name="materia_id" />
-              <field name="profesor_id" />
-              <field name="planificacion_examen_id" />
+              <field name="profesor" />
+              <field name="plan_examen_id" />
               <field name="ponderacion" />
             </group>
           </sheet>
@@ -339,11 +358,11 @@
       <field name="model">gestion_escolar.nota</field>
       <field name="arch" type="xml">
         <tree string="Nota de Alumno">
-          <field name="alumno_id" />
+          <field name="alumnos" />
           <field name="curso_id" />
           <field name="materia_id" />
-          <field name="profesor_id" />
-          <field name="planificacion_examen_id" />
+          <field name="profesor" />
+          <field name="plan_examen_id" />
           <field name="ponderacion" />
         </tree>
       </field>
@@ -356,12 +375,11 @@
         <form string="Boletín de Alumno">
           <sheet>
             <group>
-              <field name="alumno_id" />
+              <field name="alumnos" />
               <field name="curso_id" />
               <field name="gestion_id" />
-              <field name="profesor_id" />
-              <field name="materia_ids" />
-              <field name="nota_ids" />
+              <field name="profesor" />
+              <field name="notas" />
             </group>
           </sheet>
         </form>
@@ -373,10 +391,11 @@
       <field name="model">gestion_escolar.boletin</field>
       <field name="arch" type="xml">
         <tree string="Boletín de Alumno">
-          <field name="alumno_id" />
+          <field name="alumnos" />
           <field name="curso_id" />
           <field name="gestion_id" />
-          <field name="profesor_id" />
+          <field name="profesor" />
+          <field name="notas" />
         </tree>
       </field>
     </record>
@@ -389,7 +408,8 @@
           <sheet>
             <group>
               <field name="curso_id" />
-              <field name="deudores_ids" />
+              <field name="mensualidades" />
+              <field name="descripcion" />
             </group>
           </sheet>
         </form>
@@ -402,7 +422,8 @@
       <field name="arch" type="xml">
         <tree string="Reporte">
           <field name="curso_id" />
-          <field name="deudores_ids" />
+          <field name="mensualidades" />
+          <field name="descripcion" />
         </tree>
       </field>
     </record>
@@ -447,9 +468,9 @@
       <field name="view_mode">tree,form</field>
     </record>
 
-    <record id="action_padre" model="ir.actions.act_window">
-      <field name="name">Padres</field>
-      <field name="res_model">gestion_escolar.padre</field>
+    <record id="action_apoderado" model="ir.actions.act_window">
+      <field name="name">Apoderado</field>
+      <field name="res_model">gestion_escolar.apoderado</field>
       <field name="view_mode">tree,form</field>
     </record>
 
@@ -459,9 +480,9 @@
       <field name="view_mode">tree,form</field>
     </record>
 
-    <record id="action_pago_mensualidad" model="ir.actions.act_window">
+    <record id="action_mensualidad" model="ir.actions.act_window">
       <field name="name">Pagos de Mensualidad</field>
-      <field name="res_model">gestion_escolar.pago_mensualidad</field>
+      <field name="res_model">gestion_escolar.mensualidad</field>
       <field name="view_mode">tree,form</field>
     </record>
 
@@ -495,9 +516,9 @@
       <field name="view_mode">tree,form</field>
     </record>
 
-    <record id="action_planificacion_examen" model="ir.actions.act_window">
+    <record id="action_plan_examen" model="ir.actions.act_window">
       <field name="name">Exámenes</field>
-      <field name="res_model">gestion_escolar.planificacion_examen</field>
+      <field name="res_model">gestion_escolar.plan_examen</field>
       <field name="view_mode">tree,form</field>
     </record>
 
@@ -550,7 +571,7 @@
       parent="menu_gestion_escolar_root" sequence="2" />
     <menuitem id="menu_2_gestion_escolar_root" name="Clases y Horarios"
       parent="menu_gestion_escolar_root" sequence="3" />
-    <menuitem id="menu_3_gestion_escolar_root" name="Notas y Calificaciones   "
+    <menuitem id="menu_3_gestion_escolar_root" name="Notas y Calificaciones"
       parent="menu_gestion_escolar_root" sequence="4" />
     <menuitem id="menu_4_gestion_escolar_root" name="Informacion"
       parent="menu_gestion_escolar_root" sequence="5" />
@@ -560,12 +581,12 @@
       action="action_inscripcion" sequence="10" />
     <menuitem id="menu_gestion" name="Gestiones" parent="menu_1_gestion_escolar_root"
       action="action_gestion" sequence="20" />
-    <menuitem id="menu_padre" name="Padres" parent="menu_1_gestion_escolar_root"
-      action="action_padre" sequence="30" />
+    <menuitem id="menu_apoderado" name="Apoderado" parent="menu_1_gestion_escolar_root"
+      action="action_apoderado" sequence="30" />
     <menuitem id="menu_profesor" name="Profesores" parent="menu_1_gestion_escolar_root"
       action="action_profesor" sequence="40" />
-    <menuitem id="menu_pago_mensualidad" name="Pagos de Mensualidad"
-      parent="menu_1_gestion_escolar_root" action="action_pago_mensualidad" sequence="50" />
+    <menuitem id="menu_mensualidad" name="Pagos de Mensualidad"
+      parent="menu_1_gestion_escolar_root" action="action_mensualidad" sequence="50" />
 
     <menuitem id="menu_asistencia" name="Asistencia" parent="menu_2_gestion_escolar_root"
       action="action_asistencia" sequence="10" />
@@ -578,8 +599,8 @@
     <menuitem id="menu_materia" name="Materias" parent="menu_2_gestion_escolar_root"
       action="action_materia" sequence="50" />
 
-    <menuitem id="menu_planificacion_examen" name="Exámenes" parent="menu_3_gestion_escolar_root"
-      action="action_planificacion_examen" sequence="10" />
+    <menuitem id="menu_plan_examen" name="Exámenes" parent="menu_3_gestion_escolar_root"
+      action="action_plan_examen" sequence="10" />
     <menuitem id="menu_nota" name="Notas de Alumno" parent="menu_3_gestion_escolar_root"
       action="action_nota" sequence="20" />
     <menuitem id="menu_boletin" name="Boletines de Alumno"
